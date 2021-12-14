@@ -1,0 +1,30 @@
+{
+  "name": "svelte-better-form",
+  "version": "1.0.0",
+  "description": "A form management library for Svelte that is very lightweight and simple!",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ragokan/svelte-better-form.git"
+  },
+  "keywords": [
+    "svelte",
+    "state",
+    "management"
+  ],
+  "author": "ragokan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ragokan/svelte-better-form/issues"
+  },
+  "homepage": "https://github.com/ragokan/svelte-better-form#readme",
+  "devDependencies": {
+    "svelte": "^3.44.2",
+    "svelte-better-store": "^1.0.9",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.3"
+  }
+}
