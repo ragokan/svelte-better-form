@@ -1,6 +1,6 @@
 {
   "name": "svelte-better-form",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A form management library for Svelte that is very lightweight and simple!",
   "main": "dist/index.js",
   "scripts": {
@@ -26,5 +26,6 @@
     "svelte-better-store": "^1.0.9",
     "tslib": "^2.3.1",
     "typescript": "^4.5.3"
-  }
+  },
+  "type": "module"
 }
