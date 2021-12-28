@@ -1,14 +1,14 @@
-import { $writable } from "svelte-better-store";
-import { $FormError, $FormOptions } from "./types";
+import { betterWritable } from "svelte-better-store";
+import { betterFormError, betterFormOptions } from "./types";
 import { __validateForm } from "./modules/validateForm";
 
-export const $form = <Values extends object>(
+export const betterForm = <Values extends object>(
   initialValue: Values,
-  options: $FormOptions<Values> = {}
+  options: betterFormOptions<Values> = {}
 ) => {
-  const values = $writable(initialValue);
-  const errors = $writable({} as $FormError<Values>);
-  const loading = $writable(false);
+  const values = betterWritable(initialValue);
+  const errors = betterWritable({} as betterFormError<Values>);
+  const loading = betterWritable(false);
 
   const getValue = <Key extends keyof Values>(key: Key): Values[Key] => values.get()[key];
   const setValue = <Key extends keyof Values>(key: Key, value: Values[Key]) =>
@@ -27,4 +27,4 @@ export const $form = <Values extends object>(
   return { values, errors, loading, getValue, setValue, submit };
 };
 
-$form({ name: "rag", age: 25 }).getValue("name");
+betterForm({ name: "rag", age: 25 }).getValue("name");

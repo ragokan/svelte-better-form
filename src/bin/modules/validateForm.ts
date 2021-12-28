@@ -1,17 +1,20 @@
-import { $Writable } from "svelte-better-store";
-import { $FormError, $FormOptions, $FormValidator } from "../types";
+import { BetterWritable } from "svelte-better-store";
+import { betterFormError, betterFormOptions, betterFormValidator } from "../types";
 
 export const __validateForm = <Values>(
-  values: $Writable<Values>,
-  validators: $FormOptions<Values> | undefined,
-  errors: $Writable<$FormError<Values>>
+  values: BetterWritable<Values>,
+  validators: betterFormOptions<Values> | undefined,
+  errors: BetterWritable<betterFormError<Values>>
 ) => {
   const validationErrors = {};
   if (!validators) {
     return validationErrors;
   }
   Object.entries(validators || {}).forEach(
-    ([key, validate]: [string, Array<$FormValidator<typeof key>> | $FormValidator<typeof key>]) => {
+    ([key, validate]: [
+      string,
+      Array<betterFormValidator<typeof key>> | betterFormValidator<typeof key>
+    ]) => {
       if (Array.isArray(validate)) {
         for (let index = 0; index < validate.length; index++) {
           const element = validate[index];
@@ -29,6 +32,6 @@ export const __validateForm = <Values>(
       }
     }
   );
-  errors.set(validationErrors as $FormError<Values>);
+  errors.set(validationErrors as betterFormError<Values>);
   return Object.keys(validationErrors).length === 0;
 };
