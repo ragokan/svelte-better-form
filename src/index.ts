@@ -1,4 +1,4 @@
-export { $form } from "./bin/create";
+export { $form } from "./bin/form";
 export type { $FormError, $FormOptions, $FormValidator } from "./bin/types";
 export {
   emailValidator,

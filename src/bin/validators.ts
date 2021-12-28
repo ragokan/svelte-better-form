@@ -1,4 +1,4 @@
-import type { $FormValidator } from "../index";
+import type { $FormValidator } from "./types";
 
 export const minLengthValidator =
   (minLength: number, errorMessage: string): $FormValidator<string> =>
