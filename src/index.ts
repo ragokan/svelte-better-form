@@ -1,5 +1,5 @@
-export { createBetterForm } from "./bin/create";
-export type { BetterFormError, BetterFormOptions, BetterFormValidator } from "./bin/create";
+export { $form } from "./bin/create";
+export type { $FormError, $FormOptions, $FormValidator } from "./bin/types";
 export {
   emailValidator,
   maxLengthValidator,

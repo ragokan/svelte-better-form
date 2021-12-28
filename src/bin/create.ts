@@ -1,26 +1,13 @@
-import { betterStore, betterWritable } from "svelte-better-store";
+import { $store, $writable } from "svelte-better-store";
+import { $FormError, $FormOptions, $FormValidator } from "..";
 
-export type BetterFormValidator<T> = (value: T) => string | void;
-
-export type BetterFormError<Values> = { [key in keyof Values]: string | null };
-
-export interface BetterFormOptions<Values> {
-  validators?: {
-    [key in keyof Partial<Values>]:
-      | BetterFormValidator<Values[key]>
-      | Array<BetterFormValidator<Values[key]>>;
-  };
-
-  onSubmit?: (values: Values) => Promise<void>;
-}
-
-export const createBetterForm = <Values extends object>(
+export const $form = <Values extends object>(
   initialValue: Values,
-  options: BetterFormOptions<Values> = {}
+  options: $FormOptions<Values> = {}
 ) => {
-  const values = betterStore(initialValue);
-  const errors = betterWritable({} as BetterFormError<Values>);
-  const loading = betterWritable(false);
+  const values = $store(initialValue);
+  const errors = $writable({} as $FormError<Values>);
+  const loading = $writable(false);
 
   const getValue = (key: keyof Values) => values.get()[key];
   const setValue = <key extends keyof Values>(key: key, value: Values[key]) =>
@@ -34,7 +21,7 @@ export const createBetterForm = <Values extends object>(
     Object.entries(options.validators || {}).forEach(
       ([key, validate]: [
         string,
-        Array<BetterFormValidator<typeof key>> | BetterFormValidator<typeof key>
+        Array<$FormValidator<typeof key>> | $FormValidator<typeof key>
       ]) => {
         if (Array.isArray(validate)) {
           for (let index = 0; index < validate.length; index++) {
@@ -53,7 +40,7 @@ export const createBetterForm = <Values extends object>(
         }
       }
     );
-    errors.set(validationErrors as BetterFormError<Values>);
+    errors.set(validationErrors as $FormError<Values>);
     return Object.keys(validationErrors).length === 0;
   };
 

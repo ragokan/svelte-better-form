@@ -14,10 +14,10 @@
 
 ```ts
 // Simplest
-const { values } = createBetterForm({ name: "better" });
+const { values } = $form({ name: "better" });
 
 // Full example!
-const { values, loading, errors, submit, getValue, setValue } = createBetterForm(
+const { values, loading, errors, submit, getValue, setValue } = $form(
   {
     name: "",
     email: "",

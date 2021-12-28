@@ -1,22 +1,22 @@
-import type { BetterFormValidator } from "../index";
+import type { $FormValidator } from "../index";
 
 export const minLengthValidator =
-  (minLength: number, errorMessage: string): BetterFormValidator<string> =>
+  (minLength: number, errorMessage: string): $FormValidator<string> =>
   (val) =>
     val.length < minLength && errorMessage;
 
 export const maxLengthValidator =
-  (maxLength: number, errorMessage: string): BetterFormValidator<string> =>
+  (maxLength: number, errorMessage: string): $FormValidator<string> =>
   (val) =>
     val.length > maxLength && errorMessage;
 
 export const requiredValidator =
-  (errorMessage: string): BetterFormValidator<string | number | null> =>
+  (errorMessage: string): $FormValidator<string | number | null> =>
   (val) =>
     (!val || (typeof val === "string" && val.length === 0)) && errorMessage;
 
 export const emailValidator =
-  (errorMessage: string): BetterFormValidator<string> =>
+  (errorMessage: string): $FormValidator<string> =>
   (val) =>
     !_emailRegex.test(val) && errorMessage && errorMessage;
 
