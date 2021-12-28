@@ -1,24 +1,25 @@
 import type { betterFormValidator } from "./types";
 
 export const minLengthValidator =
-  (minLength: number, errorMessage: string): betterFormValidator<string> =>
+  (minLength: number, errorMessage: string): betterFormValidator<string | null | undefined> =>
   (val) =>
-    val.length < minLength && errorMessage;
+    (val === null || val === undefined || val.length < minLength) && errorMessage;
 
 export const maxLengthValidator =
-  (maxLength: number, errorMessage: string): betterFormValidator<string> =>
+  (maxLength: number, errorMessage: string): betterFormValidator<string | null | undefined> =>
   (val) =>
-    val.length > maxLength && errorMessage;
+    (val === null || val === undefined || val.length > maxLength) && errorMessage;
 
 export const requiredValidator =
-  (errorMessage: string): betterFormValidator<string | number | null> =>
+  (errorMessage: string): betterFormValidator<any> =>
   (val) =>
-    (!val || (typeof val === "string" && val.length === 0)) && errorMessage;
+    (val === null || val === undefined || (typeof val === "string" && val.length === 0)) &&
+    errorMessage;
 
 export const emailValidator =
-  (errorMessage: string): betterFormValidator<string> =>
+  (errorMessage: string): betterFormValidator<string | null | undefined> =>
   (val) =>
-    !_emailRegex.test(val) && errorMessage && errorMessage;
+    (val === null || val === undefined || !_emailRegex.test(val)) && errorMessage;
 
 // From https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
 const _emailRegex =

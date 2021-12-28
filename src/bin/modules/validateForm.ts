@@ -5,10 +5,10 @@ export const __validateForm = <Values>(
   values: BetterWritable<Values>,
   validators: betterFormOptions<Values> | undefined,
   errors: BetterWritable<betterFormError<Values>>
-) => {
+): boolean => {
   const validationErrors = {};
   if (!validators) {
-    return validationErrors;
+    return true;
   }
   Object.entries(validators || {}).forEach(
     ([key, validate]: [

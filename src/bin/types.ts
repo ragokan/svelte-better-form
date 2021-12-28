@@ -9,5 +9,7 @@ export interface betterFormOptions<Values> {
       | Array<betterFormValidator<Values[key]>>;
   };
 
+  validateOnChange?: boolean;
+
   onSubmit?: (values: Values) => void | Promise<void>;
 }
