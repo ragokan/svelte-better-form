@@ -25,7 +25,7 @@ export const betterForm = <Values extends object>(
     return status;
   };
 
-  if (options.validateOnChange) {
+  if (options.validateOnChange !== false) {
     let unsub = noop;
     onMount(() => {
       unsub = values.subscribe(() => {
