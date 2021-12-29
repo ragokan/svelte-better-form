@@ -46,5 +46,3 @@ export const betterForm = <Values extends object>(
 
   return { values, errors, loading, getValue, setValue, submit };
 };
-
-betterForm({ name: "rag", age: 25 }).getValue("name");
