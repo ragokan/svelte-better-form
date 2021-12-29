@@ -1,7 +1,7 @@
 import { betterWritable } from "svelte-better-store";
 import { betterFormError, betterFormOptions } from "./types";
 import { __validateForm } from "./modules/validateForm";
-import { onDestroy, onMount } from "svelte/internal";
+import { noop, onDestroy, onMount } from "svelte/internal";
 
 export const betterForm = <Values extends object>(
   initialValue: Values,
@@ -26,14 +26,15 @@ export const betterForm = <Values extends object>(
   };
 
   if (options.validateOnChange) {
+    let unsub = noop;
     onMount(() => {
-      const unsub = values.subscribe(() => {
+      unsub = values.subscribe(() => {
         if (_isValidated) {
           _validate();
         }
       });
-      onDestroy(unsub);
     });
+    onDestroy(unsub);
   }
 
   const submit = async () => {
