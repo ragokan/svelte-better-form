@@ -40,8 +40,12 @@ export const betterForm = <Values extends object>(
   const submit = async () => {
     if (_validate() && options.onSubmit) {
       loading.set(true);
-      await options.onSubmit(values.get());
-      loading.set(false);
+      try {
+        await options.onSubmit(values.get());
+        loading.set(false);
+      } catch (error) {
+        loading.set(false);
+      }
     }
   };
 
